@@ -4,12 +4,13 @@ const net  = require('net');
 const fs = require('fs');
 
 const settings = require('./settings.json');
+const songData = require('./data.json');
 
 if (settings.port) {
     console.log(`Using this port number: ${settings.port}`);
 } else {
     console.log('Proxy port number is not specified in settings.json.');
-    console.log('Using default port number: 25252')
+    console.log('Using default port number: 25252');
 }
 
 const log = (txt) => {
@@ -29,7 +30,14 @@ const watcher = (url, body) => {
                 }
             }
             log(data.toString());
+            let songName;
+            if (Object.keys(songData).indexOf(data.live_difficulty_id.toString()) !== -1) {
+                songName = songData[data.live_difficulty_id.toString()].join(' ');
+            } else {
+                songName = `${data.live_difficulty_id} (plz contribute)`;
+            }
             const resultText = `[LIVE]
+SONG: ${songName}
 MAX COMBO: ${data.max_combo}
 PERFECT: ${data.perfect_cnt}
 GREAT: ${data.great_cnt}
