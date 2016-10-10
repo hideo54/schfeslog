@@ -2,16 +2,39 @@ const http = require('http');
 const url = require('url');
 const net  = require('net');
 const fs = require('fs');
+const process = require('process');
 const cheerio = require('cheerio');
 
-const settings = require('./settings.json');
+let settings = require('./settings.json');
 const songData = require('./data.json');
+
+const MAIN_HOST = 'prod-jp.lovelive.ge.klabgames.net';
 
 if (settings.port) {
     console.log(`Using this port number: ${settings.port}`);
 } else {
     console.log('Proxy port number is not specified in settings.json.');
     console.log('Using default port number: 25252');
+}
+
+if (settings.log) {
+    let isAllFalse = true;
+    for (section of ['live']) {
+        if (Object.keys(settings.log).indexOf(section) === -1) {
+            console.log(`Whether ${section} data is logged is not specified.`);
+            console.log(`Using default ${section}-logging setting: false`);
+            settings.log[section] = false
+        } else {
+            isAllFalse = false;
+        }
+    }
+    if (isAllFalse) {
+        console.log('All log settings are set as false.');
+        process.exit();
+    }
+} else {
+    console.log('Log settings are not specified in settings.json.');
+    process.exit();
 }
 
 const log = (txt) => {
@@ -21,22 +44,21 @@ const log = (txt) => {
 }
 
 const watcher = (path, body) => {
-    log(`${path}\n${body}\n\n`);
-    if (path === '/main.php/live/reward') {
-        let data;
-        for (line of body.split('\n')) {
-            if (line[0] === '{') {
-                data = JSON.parse(line);
+    if (settings.log.live) {
+        if (path === '/main.php/live/reward') {
+            let data;
+            for (line of body.split('\n')) {
+                if (line[0] === '{') {
+                    data = JSON.parse(line);
+                }
             }
-        }
-        log(data.toString());
-        let songName;
-        if (Object.keys(songData).indexOf(data.live_difficulty_id.toString()) !== -1) {
-            songName = songData[data.live_difficulty_id.toString()].join(' ');
-        } else {
-            songName = `${data.live_difficulty_id} (plz contribute)`;
-        }
-        const resultText = `[LIVE]
+            let songName;
+            if (Object.keys(songData).indexOf(data.live_difficulty_id.toString()) !== -1) {
+                songName = songData[data.live_difficulty_id.toString()].join(' ');
+            } else {
+                songName = `${data.live_difficulty_id} (plz contribute)`;
+            }
+            const resultText = `[LIVE]
 SONG: ${songName}
 MAX COMBO: ${data.max_combo}
 PERFECT: ${data.perfect_cnt}
@@ -44,7 +66,8 @@ GREAT: ${data.great_cnt}
 GOOD: ${data.good_cnt}
 BAD: ${data.bad_cnt}
 MISS: ${data.miss_cnt}`;
-        console.log(resultText);
+            log(resultText + '\n-----\n');
+        }
     }
 }
 
@@ -77,7 +100,7 @@ const proxy = http.createServer( (req, res) => {
     });
     req.pipe(srvReq);
 
-    if (reqUrl.hostname === 'prod-jp.lovelive.ge.klabgames.net') {
+    if (reqUrl.hostname === MAIN_HOST)) {
         let body = [];
         req.on('data', (chunk) => {
             body.push(chunk);
