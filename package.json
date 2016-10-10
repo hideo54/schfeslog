@@ -8,13 +8,13 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/hideo54/schfes-proxy.git"
+        "url": "https://github.com/hideo54/schfeslog.git"
     },
     "author": "hideo54",
     "license": "Apache-2.0",
     "bugs": {
-        "url": "https://github.com/hideo54/schfes-proxy",
+        "url": "https://github.com/hideo54/schfeslog",
         "email": "contact@hideo54.com"
     },
-    "homepage": "https://github.com/hideo54/schfes-proxy#readme"
+    "homepage": "https://github.com/hideo54/schfeslog#readme"
 }
