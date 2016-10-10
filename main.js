@@ -20,7 +20,25 @@ const log = (txt) => {
 
 const watcher = (url, body) => {
     log(`${url.hostname}${url.path}\n${body}\n\n`);
-    // Do something
+    if (url.hostname === 'prod-jp.lovelive.ge.klabgames.net'){
+        if (url.path === '/main.php/live/reward') {
+            let data;
+            for (line of body.split('\n')) {
+                if (line[0] === '{') {
+                    data = JSON.parse(line);
+                }
+            }
+            log(data.toString());
+            const resultText = `[LIVE]
+MAX COMBO: ${data.max_combo}
+PERFECT: ${data.perfect_cnt}
+GREAT: ${data.great_cnt}
+GOOD: ${data.good_cnt}
+BAD: ${data.bad_cnt}
+MISS: ${data.miss_cnt}`;
+            console.log(resultText);
+        }
+    }
 }
 
 const proxy = http.createServer( (req, res) => {
