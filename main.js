@@ -5,6 +5,8 @@ const fs = require('fs');
 const process = require('process');
 const cheerio = require('cheerio');
 
+const twitter = require('./twitter.js');
+
 let settings = require('./settings.json');
 const songData = require('./data.json');
 
@@ -71,6 +73,7 @@ const watcher = (path, body) => {
             const resultText = '[LIVE]\n' + result.map((elm) => {
                 return elm.join(' ');
             }).join('\n');
+            twitter.post(resultText);
             console.log(resultText);
             log(`${resultText}\n`);
         }
