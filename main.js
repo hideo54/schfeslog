@@ -19,24 +19,23 @@ const log = (txt) => {
     });
 }
 
-const watcher = (url, body) => {
-    log(`${url.hostname}${url.path}\n${body}\n\n`);
-    if (url.hostname === 'prod-jp.lovelive.ge.klabgames.net'){
-        if (url.path === '/main.php/live/reward') {
-            let data;
-            for (line of body.split('\n')) {
-                if (line[0] === '{') {
-                    data = JSON.parse(line);
-                }
+const watcher = (path, body) => {
+    log(`${path}\n${body}\n\n`);
+    if (path === '/main.php/live/reward') {
+        let data;
+        for (line of body.split('\n')) {
+            if (line[0] === '{') {
+                data = JSON.parse(line);
             }
-            log(data.toString());
-            let songName;
-            if (Object.keys(songData).indexOf(data.live_difficulty_id.toString()) !== -1) {
-                songName = songData[data.live_difficulty_id.toString()].join(' ');
-            } else {
-                songName = `${data.live_difficulty_id} (plz contribute)`;
-            }
-            const resultText = `[LIVE]
+        }
+        log(data.toString());
+        let songName;
+        if (Object.keys(songData).indexOf(data.live_difficulty_id.toString()) !== -1) {
+            songName = songData[data.live_difficulty_id.toString()].join(' ');
+        } else {
+            songName = `${data.live_difficulty_id} (plz contribute)`;
+        }
+        const resultText = `[LIVE]
 SONG: ${songName}
 MAX COMBO: ${data.max_combo}
 PERFECT: ${data.perfect_cnt}
@@ -44,8 +43,7 @@ GREAT: ${data.great_cnt}
 GOOD: ${data.good_cnt}
 BAD: ${data.bad_cnt}
 MISS: ${data.miss_cnt}`;
-            console.log(resultText);
-        }
+        console.log(resultText);
     }
 }
 
@@ -65,13 +63,15 @@ const proxy = http.createServer( (req, res) => {
     });
     req.pipe(srvReq);
 
-    let body = [];
-    req.on('data', (chunk) => {
-        body.push(chunk);
-    }).on('end', () => {
-        body = Buffer.concat(body).toString();
-        watcher(reqUrl, body);
-    });
+    if (reqUrl.hostname === 'prod-jp.lovelive.ge.klabgames.net') {
+        let body = [];
+        req.on('data', (chunk) => {
+            body.push(chunk);
+        }).on('end', () => {
+            body = Buffer.concat(body).toString();
+            watcher(reqUrl.path, body);
+        });
+    }
 
     srvReq.on('error', (err) => {
         console.log('failed');
