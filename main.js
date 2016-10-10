@@ -2,6 +2,7 @@ const http = require('http');
 const url = require('url');
 const net  = require('net');
 const fs = require('fs');
+const cheerio = require('cheerio');
 
 const settings = require('./settings.json');
 const songData = require('./data.json');
@@ -59,7 +60,20 @@ const proxy = http.createServer( (req, res) => {
         agent: socket.$agent
     }, function onsrvRes(srvRes) {
         res.writeHead(srvRes.statusCode, srvRes.headers);
-        srvRes.pipe(res);
+        if ((reqUrl.hostname+reqUrl.path).indexOf(`${MAIN_HOST}/webview.php/announce/`) !== -1) {
+            let body = [];
+            srvRes.on('data', (chunk) => {
+                body.push(chunk);
+            }).on('end', () => {
+                body = Buffer.concat(body).toString();
+                let $ = cheerio.load(body);
+                $('body').prepend(`<h1 style="color: red;">You\'re using schfeslog!</h1>
+<p>Note that all of your actions are monitored.</p>`);
+                res.write($.html());
+            });
+        } else {
+            srvRes.pipe(res);
+        }
     });
     req.pipe(srvReq);
 

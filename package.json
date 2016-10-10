@@ -16,5 +16,8 @@
         "url": "https://github.com/hideo54/schfeslog",
         "email": "contact@hideo54.com"
     },
-    "homepage": "https://github.com/hideo54/schfeslog#readme"
+    "homepage": "https://github.com/hideo54/schfeslog#readme",
+    "dependencies": {
+        "cheerio": "^0.22.0"
+    }
 }
