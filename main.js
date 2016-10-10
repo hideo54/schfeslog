@@ -58,15 +58,21 @@ const watcher = (path, body) => {
             } else {
                 songName = `${data.live_difficulty_id} (plz contribute)`;
             }
-            const resultText = `[LIVE]
-SONG: ${songName}
-MAX COMBO: ${data.max_combo}
-PERFECT: ${data.perfect_cnt}
-GREAT: ${data.great_cnt}
-GOOD: ${data.good_cnt}
-BAD: ${data.bad_cnt}
-MISS: ${data.miss_cnt}`;
-            log(resultText + '\n-----\n');
+            const result = [
+                ['SONG', songName],
+                ['SCORE', data.score_smile + data.score_cute + data.score_cool],
+                ['MAX COMBO', data.max_combo],
+                ['PERFECT', data.perfect_cnt],
+                ['GREAT', data.great_cnt],
+                ['GOOD', data.good_cnt],
+                ['BAD', data.bad_cnt],
+                ['MISS', data.miss_cnt]
+            ]
+            const resultText = '[LIVE]\n' + result.map((elm) => {
+                return elm.join(' ');
+            }).join('\n');
+            console.log(resultText);
+            log(`${resultText}\n`);
         }
     }
 }
@@ -100,7 +106,7 @@ const proxy = http.createServer( (req, res) => {
     });
     req.pipe(srvReq);
 
-    if (reqUrl.hostname === MAIN_HOST)) {
+    if (reqUrl.hostname === MAIN_HOST) {
         let body = [];
         req.on('data', (chunk) => {
             body.push(chunk);
