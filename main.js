@@ -2,6 +2,16 @@ const http = require('http');
 const url = require('url');
 const net  = require('net');
 
+const settings = require('./settings.json');
+
+if (settings.port) {
+    if settings.
+    console.log(`Using this port number: ${settings.port}`);
+} else {
+    console.log('Proxy port number is not specified in settings.json.');
+    console.log('Using default port number: 25252')
+}
+
 const proxy = http.createServer( (req, res) => {
     const reqUrl = url.parse(req.url);
     const socket = req.socket || req.connection;
@@ -20,7 +30,7 @@ const proxy = http.createServer( (req, res) => {
     srvReq.on('error', (err) => {
         console.log('failed');
     });
-}).listen(25252);
+}).listen(settings.port || 25252);
 
 proxy.on('connect', (req, soc, head) => {
     const reqUrl = url.parse('https://' + req.url);
