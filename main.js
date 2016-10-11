@@ -1,6 +1,6 @@
 const http = require('http');
 const url = require('url');
-const net  = require('net');
+const net = require('net');
 const fs = require('fs');
 const process = require('process');
 const cheerio = require('cheerio');
