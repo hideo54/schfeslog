@@ -5,10 +5,11 @@ const fs = require('fs');
 const process = require('process');
 const cheerio = require('cheerio');
 
-const twitter = require('./twitter.js');
-
 let settings = require('./settings.json');
 const songData = require('./data.json');
+
+let twitter;
+if (settings.twitter.on) twitter = require('./twitter.js');
 
 const MAIN_HOST = 'prod-jp.lovelive.ge.klabgames.net';
 
@@ -43,22 +44,20 @@ const log = (txt) => {
     fs.appendFile('log.txt', txt, (err) => {
         if (err) throw err;
     });
-}
+};
 
 const watcher = (path, body) => {
     if (settings.log.live) {
         if (path === '/main.php/live/reward') {
             let data;
             for (line of body.split('\n')) {
-                if (line[0] === '{') {
-                    data = JSON.parse(line);
-                }
+                if (line[0] === '{') data = JSON.parse(line);
             }
             let songName;
             if (Object.keys(songData).indexOf(data.live_difficulty_id.toString()) !== -1) {
-                songName = songData[data.live_difficulty_id.toString()].join(' ');
+                songName = songData[data.live_difficulty_id].join(' ');
             } else {
-                songName = `${data.live_difficulty_id} (plz contribute)`;
+                songName = data.live_difficulty_id;
             }
             const result = [
                 ['SONG', songName],
@@ -69,18 +68,18 @@ const watcher = (path, body) => {
                 ['GOOD', data.good_cnt],
                 ['BAD', data.bad_cnt],
                 ['MISS', data.miss_cnt]
-            ]
-            const resultText = '[LIVE]\n' + result.map((elm) => {
-                return elm.join(' ');
+            ];
+            const resultText = '[LIVE RESULT]\n' + result.map((elm) => {
+                return elm.join(': ');
             }).join('\n');
-            twitter.post(resultText);
+            if (settings.twitter.on) twitter.post(resultText);
             console.log(resultText);
             log(`${resultText}\n`);
         }
     }
-}
+};
 
-const proxy = http.createServer( (req, res) => {
+const proxy = http.createServer((req, res) => {
     const reqUrl = url.parse(req.url);
     const socket = req.socket || req.connection;
     const srvReq = http.request({

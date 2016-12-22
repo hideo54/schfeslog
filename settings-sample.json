@@ -4,9 +4,12 @@
         "live": true
     },
     "twitter": {
-       "consumer_key": "XXXXXXXXXXXXXXXXXXXXXX",
-       "consumer_secret": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-       "access_token_key": "XXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-       "access_token_secret": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        "on": true,
+        "auth": {
+            "consumer_key": "XXXXXXXXXXXXXXXXXXXXXX",
+            "consumer_secret": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+            "access_token_key": "XXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+            "access_token_secret": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        }
     }
 }
