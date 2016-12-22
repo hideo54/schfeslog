@@ -1,6 +1,6 @@
 {
     "name": "schfeslog",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "description": "A proxy server for watching the network to get info of \"LoveLive! School Idol Festival\" play results.",
     "main": "main.js",
     "scripts": {
@@ -18,7 +18,6 @@
     },
     "homepage": "https://github.com/hideo54/schfeslog#readme",
     "dependencies": {
-        "cheerio": "^0.22.0",
         "twitter": "^1.4.0"
     }
 }
