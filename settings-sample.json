@@ -4,7 +4,7 @@
         "live": true
     },
     "twitter": {
-        "on": true,
+        "on": false,
         "auth": {
             "consumer_key": "XXXXXXXXXXXXXXXXXXXXXX",
             "consumer_secret": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
