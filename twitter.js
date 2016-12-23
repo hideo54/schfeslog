@@ -3,7 +3,7 @@ const process = require('process');
 
 const settings = require('./settings.json');
 
-const client = new Twitter(settings.twitter);
+const client = new Twitter(settings.twitter.auth);
 
 let twitterModule = {};
 twitterModule.post = (text) => {
