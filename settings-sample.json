@@ -11,5 +11,9 @@
             "access_token_key": "XXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
             "access_token_secret": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
         }
+    },
+    "server": {
+        "on": false,
+        "uri": "https://XXXXXXXXXXX/live/result"
     }
 }
