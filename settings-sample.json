@@ -14,6 +14,7 @@
     },
     "server": {
         "on": false,
-        "uri": "https://XXXXXXXXXXX/live/result"
+        "uri": "https://XXXXXXXXXXX/live/result",
+        "password": "change_password"
     }
 }

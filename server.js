@@ -9,6 +9,7 @@ serverModule.post = (data, songName) => {
             "Content-type": "application/json",
         },
         json: {
+          "password": settings.server.password,
           "songId": data.live_difficulty_id,
           "songName": songName,
           "score": data.score_smile + data.score_cute + data.score_cool,
