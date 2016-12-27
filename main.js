@@ -49,28 +49,36 @@ const log = (txt) => {
     });
 };
 
+const getSongData = (body) => {
+    let data;
+    for (line of body.split('\n')) {
+        if (line[0] === '{') data = JSON.parse(line);
+    }
+    const id = data.live_difficulty_id.toString(); // type: string
+    if (Object.keys(songData).indexOf(id) !== -1) {
+        data.title = songData[id].join(' ');
+    }
+    return data;
+}
+
 const watcher = (path, body) => {
     if (settings.log.live) {
+        if (path === '/main.php/live/partyList') {
+            const song = getSongData(body);
+            if (song.name === null) song.name  = 'Not registered';
+            console.log(`Selected ${song.id} (${song.name})`);
+        }
         if (path === '/main.php/live/reward') {
-            let data;
-            for (line of body.split('\n')) {
-                if (line[0] === '{') data = JSON.parse(line);
-            }
-            let songName;
-            if (Object.keys(songData).indexOf(data.live_difficulty_id.toString()) !== -1) {
-                songName = songData[data.live_difficulty_id].join(' ');
-            } else {
-                songName = data.live_difficulty_id;
-            }
+            const song = getSongData(body);
             const result = [
-                ['SONG', songName],
-                ['SCORE', data.score_smile + data.score_cute + data.score_cool],
-                ['MAX COMBO', data.max_combo],
-                ['PERFECT', data.perfect_cnt],
-                ['GREAT', data.great_cnt],
-                ['GOOD', data.good_cnt],
-                ['BAD', data.bad_cnt],
-                ['MISS', data.miss_cnt]
+                ['SONG', song.title ? song.title : song.live_difficulty_id],
+                ['SCORE', song.score_smile + song.score_cute + song.score_cool],
+                ['MAX COMBO', song.max_combo],
+                ['PERFECT', song.perfect_cnt],
+                ['GREAT', song.great_cnt],
+                ['GOOD', song.good_cnt],
+                ['BAD', song.bad_cnt],
+                ['MISS', song.miss_cnt]
             ];
             const resultText = '[LIVE RESULT]\n' + result.map((elm) => {
                 return elm.join(': ');
@@ -78,7 +86,7 @@ const watcher = (path, body) => {
             if (settings.twitter.on) twitter.post(resultText);
             if (settings.server.on) server.post(data, songName);
             console.log(resultText);
-            log(`${resultText}\n`);
+            log(`-----\n${Date().toString()}\n${resultText}\n`);
         }
     }
 };
