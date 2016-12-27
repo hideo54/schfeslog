@@ -2,7 +2,18 @@ const request = require('request');
 const settings = require('./settings.json');
 
 let serverModule = {};
-serverModule.post = (data, songName) => {
+
+const parseRequestData = (body) => {
+    let data;
+    for (line of body.split('\n')) {
+        if (line[0] === '{') data = JSON.parse(line);
+    }
+    return data;
+}
+
+serverModule.post = (body, songName) => {
+    let data;
+    data = parseRequestData(body);
     options = {
         uri: settings.server.uri,
         headers: {

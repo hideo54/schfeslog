@@ -84,7 +84,7 @@ const watcher = (path, body) => {
                 return elm.join(': ');
             }).join('\n');
             if (settings.twitter.on) twitter.post(resultText);
-            if (settings.server.on) server.post(data, songName);
+            if (settings.server.on) server.post(body, song.title ? song.title : song.live_difficulty_id);
             console.log(resultText);
             log(`-----\n${Date().toString()}\n${resultText}\n`);
         }
