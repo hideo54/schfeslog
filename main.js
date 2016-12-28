@@ -11,6 +11,9 @@ const songData = require('./data.json');
 let twitter;
 if (settings.twitter.on) twitter = require('./twitter.js');
 
+let server;
+if (settings.server.on) server = require('./server.js');
+
 const MAIN_HOST = 'prod-jp.lovelive.ge.klabgames.net';
 
 if (settings.port) {
@@ -81,6 +84,7 @@ const watcher = (path, body) => {
                 return elm.join(': ');
             }).join('\n');
             if (settings.twitter.on) twitter.post(resultText);
+            if (settings.server.on) server.post(body, song.title ? song.title : song.live_difficulty_id);
             console.log(resultText);
             log(`-----\n${Date().toString()}\n${resultText}\n`);
         }
