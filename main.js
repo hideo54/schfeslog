@@ -12,7 +12,12 @@ let twitter;
 if (settings.twitter.on) twitter = require('./twitter.js');
 
 let server;
-if (settings.server.on) server = require('./server.js');
+try {
+    if (settings.server.on) server = require('./server.js');
+} catch (TypeError) {
+    console.log('v1.2.0~: New update applied. Edit settings.json properly according to settings-sample.json.');
+    process.exit();
+}
 
 const MAIN_HOST = 'prod-jp.lovelive.ge.klabgames.net';
 
