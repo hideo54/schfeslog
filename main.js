@@ -70,8 +70,8 @@ const watcher = (path, body) => {
     if (settings.log.live) {
         if (path === '/main.php/live/partyList') {
             const song = getSongData(body);
-            if (song.name === null) song.name  = 'Not registered';
-            console.log(`Selected ${song.id} (${song.name})`);
+            if (song.title === null) song.title  = 'Not registered';
+            console.log(`Selected ${song.live_difficulty_id} (${song.title})`);
         }
         if (path === '/main.php/live/reward') {
             const song = getSongData(body);
