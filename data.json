@@ -35,6 +35,9 @@
     "40": ["WILD STARS", "EASY"],
     "41": ["WILD STARS", "NORMAL"],
     "42": ["WILD STARS", "HARD"],
+    "46": ["Mermaid festa vol.2 ~Passionate~", "EASY"],
+    "47": ["Mermaid festa vol.2 ~Passionate~", "NORMAL"],
+    "48": ["Mermaid festa vol.2 ~Passionate~", "HARD"],
     "49": ["乙女式れんあい塾", "EASY"],
     "50": ["乙女式れんあい塾", "NORMAL"],
     "51": ["乙女式れんあい塾", "HARD"],
@@ -134,6 +137,10 @@
     "444": ["Anemone heart", "NORMAL"],
     "445": ["Anemone heart", "HARD"],
     "446": ["乙女式れんあい塾", "EXPERT"],
+    "455": ["なわとび", "EASY"],
+    "456": ["なわとび", "NORMAL"],
+    "457": ["なわとび", "HARD"],
+    "458": ["Mermaid festa vol.2 ~Passionate~", "EXPERT"],
     "460": ["それは僕たちの奇跡", "EASY"],
     "461": ["それは僕たちの奇跡", "NORMAL"],
     "462": ["それは僕たちの奇跡", "HARD"],
@@ -163,6 +170,7 @@
     "565": ["after school NAVIGATORS", "EXPERT"],
     "564": ["LONELIEST BABY", "EXPERT"],
     "567": ["Anemone heart", "EXPERT"],
+    "568": ["なわとび", "EXPERT"],
     "578": ["Dancing stars on me!", "EASY"],
     "579": ["Dancing stars on me!", "NORMAL"],
     "580": ["Dancing stars on me!", "HARD"],
@@ -458,5 +466,6 @@
     "1494": ["夢で夜空を照らしたい", "HARD"],
     "1495": ["夢で夜空を照らしたい", "EXPERT"],
     "1496": ["ダイヤモンドプリンセスの憂鬱", "MASTER"],
-    "1497": ["Love marginal", "MASTER"]
+    "1497": ["Love marginal", "MASTER"],
+    "1517": ["タカラモノズ", "MASTER"]
 }
