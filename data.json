@@ -145,6 +145,9 @@
     "461": ["それは僕たちの奇跡", "NORMAL"],
     "462": ["それは僕たちの奇跡", "HARD"],
     "478": ["Paradise Live", "EXPERT"],
+    "479": ["Beat in Angel", "EASY"],
+    "480": ["Beat in Angel", "NORMAL"],
+    "481": ["Beat in Angel", "HARD"],
     "496": ["どんなときもずっと", "EASY"],
     "497": ["どんなときもずっと", "NORMAL"],
     "498": ["どんなときもずっと", "HARD"],
@@ -171,6 +174,7 @@
     "564": ["LONELIEST BABY", "EXPERT"],
     "567": ["Anemone heart", "EXPERT"],
     "568": ["なわとび", "EXPERT"],
+    "569": ["Beat in Angel", "EXPERT"],
     "578": ["Dancing stars on me!", "EASY"],
     "579": ["Dancing stars on me!", "NORMAL"],
     "580": ["Dancing stars on me!", "HARD"],
@@ -467,5 +471,13 @@
     "1495": ["夢で夜空を照らしたい", "EXPERT"],
     "1496": ["ダイヤモンドプリンセスの憂鬱", "MASTER"],
     "1497": ["Love marginal", "MASTER"],
-    "1517": ["タカラモノズ", "MASTER"]
+    "1513": ["最低で最高のParadiso", "EASY"],
+    "1514": ["最低で最高のParadiso", "NORMAL"],
+    "1515": ["最低で最高のParadiso", "HARD"],
+    "1516": ["最低で最高のParadiso", "EXPERT"],
+    "1517": ["タカラモノズ", "MASTER"],
+    "1518": ["G線上のシンデレラ", "EASY"],
+    "1519": ["G線上のシンデレラ", "NORMAL"],
+    "1520": ["G線上のシンデレラ", "HARD"],
+    "1521": ["G線上のシンデレラ", "EXPERT"]
 }
