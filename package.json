@@ -1,6 +1,6 @@
 {
     "name": "schfeslog",
-    "version": "1.2.6",
+    "version": "1.2.7",
     "description": "A proxy server for watching the network to get info of \"LoveLive! School Idol Festival\" play results.",
     "main": "main.js",
     "scripts": {
