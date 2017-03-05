@@ -3,7 +3,6 @@ const url = require('url');
 const net = require('net');
 const fs = require('fs');
 const process = require('process');
-const cheerio = require('cheerio');
 
 let settings = require('./settings.json');
 const songData = require('./data.json');
