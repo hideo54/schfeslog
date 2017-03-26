@@ -2,7 +2,9 @@
 
 スマートフォンゲーム「ラブライブ! スクールアイドルフェスティバル」のプレイログを取得して色々するためのHTTPプロキシです。
 
-(**自己責任で使用してください。**)
+**今年3月から運営のサーバーとの通信の全てにTLSが使用されるようになったため、現在のコードは一切動作しません。間もなくアップデートする予定ですのでもう少しお待ち下さい。**
+
+**Current code does NOT work at all because the game has started to use TLS for all communications with official servers since March. I am planning to provide updates as soon as possible.**
 
 ## バージョン
 
